@@ -7,7 +7,7 @@ import lombok.Setter;
 @Setter
 public class Comment {
 	int id;
-	String userName;
+	int userId;
 	int boardId;
 	String comment;
 

@@ -8,7 +8,7 @@ import lombok.Setter;
 public class User {
 
 	int id;
-	int passward;
+	int password;
 	String userName;
 	int old;
 	
