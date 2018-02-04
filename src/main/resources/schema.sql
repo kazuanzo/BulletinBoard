@@ -1,9 +1,23 @@
+drop table if exists account cascade;
+
 drop table if exists comment cascade;
 
 drop table if exists board cascade;
 
 drop table if exists user cascade;
 
+drop table if exists account cascade;
+
+
+create table if not exists account(
+	id int  not null AUTO_INCREMENT,
+	user_name varchar(128),
+    password varchar(128),
+    first_name varchar(128),
+    last_name varchar(128),
+    role_name varchar(128),
+    PRIMARY KEY (id)
+);
 
 create table if not exists user(
 	id int  not null AUTO_INCREMENT,

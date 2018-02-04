@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>新規登録</title>
+</head>
+<body>
+	<form id="registration_form" method="post" th:action="@{'/registration'}" >
+		<fieldset id="login_field">
+			<div class="form-group">
+				<label>ユーザー名</label> <input type="text" class="form-control"
+					id="userName" name="userName" placeholder="ユーザー名を入力してください" />
+			</div>
+			<div class="form-group">
+				<label>苗字</label> <input type="text" class="form-control"
+					id="firstName" name="firstName" placeholder="苗字を入力してください" />
+			</div>
+			<div class="form-group">
+				<label>名前</label> <input type="text" class="form-control"
+					id="lastName" name="lastName" placeholder="名前を入力してください" />
+			</div>
+			<div class="form-group">
+				<label>権限</label> <select  class="form-control" id="roleName" name="roleName">
+				<option th:each="rolename : ${rolename}" th:value="${rolename.value}" th:text="${rolename.text}">
+				</select>			
+			</div>
+			<div class="form-group">
+				<label>パスワード</label> <input type="password" class="form-control"
+					id="password" name="password" placeholder="パスワードを入力してください" />
+			</div>
+			<div class="form-group">
+				<input id="login_button" type="submit" value="登録" />
+			</div>
+		</fieldset>
+	</form>
+
+</body>
+</html>

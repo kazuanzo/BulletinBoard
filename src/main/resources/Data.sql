@@ -1,0 +1,1 @@
+INSERT INTO account (id,user_name,first_name,last_name,role_name,password) values(1,'test','太郎','営業','USER','test');
