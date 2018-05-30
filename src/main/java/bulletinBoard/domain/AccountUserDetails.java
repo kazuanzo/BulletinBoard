@@ -31,6 +31,11 @@ public class AccountUserDetails implements UserDetails{
 		return AuthorityUtils.createAuthorityList("ROLE_" +this.account.getRoleName());
 	}
 	
+	
+	public  int getId(){
+	return account.getId();	
+	}
+	
 
 	@Override
 	public String getPassword(){

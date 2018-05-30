@@ -1,20 +1,29 @@
 package bulletinBoard.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import lombok.Getter;
+import lombok.Setter;
+@Getter
+@Setter
 @Entity
 @Table(name="account")
 public class Account implements Serializable{
-	
 
-	
+
 	/**
 	 * 
 	 */
@@ -23,53 +32,21 @@ public class Account implements Serializable{
 	@GeneratedValue
 	private int id;
 	@Column(name="user_name")
-    private String userName;
+	private String userName;
 	@Column(name="password")
-    private String password;
+	private String password;
 	@Column(name="first_name")
-    private String firstName;
+	private String firstName;
 	@Column(name="last_name")
-    private String lastName;
+	private String lastName;
 	@Column(name="role_name")
 	@Enumerated(EnumType.STRING)
 	private RoleName roleName;
 
-	public String getFirstName() {
-		return firstName;
-	}
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-	public String getLastName() {
-		return lastName;
-	}
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
+	/*@OneToMany(fetch = FetchType.EAGER)
+	@JoinColumn(name="acId", referencedColumnName="id",insertable = false, updatable = false)
+	private List<Comment> commentList;*/
+	
 
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
-	public RoleName getRoleName() {
-		return roleName;
-	}
-	public void setRoleName(RoleName roleName) {
-		this.roleName = roleName;
-	}
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
-	public void setPassword(String password) {
-		this.password = password;
-	}
-	public String getUserName() {
-		return userName;
-	}
-	public String getPassword() {
-		return password;
-	}
- 
+
 }

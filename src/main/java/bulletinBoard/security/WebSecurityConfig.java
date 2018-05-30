@@ -24,6 +24,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder(); 
 	}
+	
 
 	@Override
 	public void configure(WebSecurity web)throws Exception{
@@ -55,9 +56,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 		//ログイン画面のhtmlのinputのname属性を見に行っている
 		.passwordParameter("password")
 		//ログアウトのURL
-		.and().logout().logoutRequestMatcher(new AntPathRequestMatcher("signout"))
+		.and().logout().logoutUrl("/logout")
 		//ログアウト成功したあとのURL
-		.logoutSuccessUrl("/login")
+		.logoutSuccessUrl("/loginForm")
 		//ログアウトしたら cookieの　JSESSIONID を削除
 		.deleteCookies("JSESSIONID")
 		//ログアウトしたらセッションを無効にする
@@ -73,8 +74,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 	//パスワードを平文で保存しているのでpasswordEncoder()を使用していない。
 	@Override
 	public void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.userDetailsService(UserDetailsService);
-//		.passwordEncoder(passwordEncoder()); // hashed password
+		auth.userDetailsService(UserDetailsService)
+		.passwordEncoder(passwordEncoder()); // hashed password
 
 	}
 }

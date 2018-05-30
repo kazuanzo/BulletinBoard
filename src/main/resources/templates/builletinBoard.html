@@ -1,10 +1,55 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
+<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet"></link>
+<script th:src="@{/js/lib/jquery-3.3.1.min.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<script th:inline="javascript">
+var boardType = /*[[${boardType}]]*/ '1';
+</script>
+
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>掲示板画面</title>
+<script th:src="@{/js/controller/boardType.js}"></script>
 </head>
 <body>
+	<!-- タイプで検索する
+出力　id.タイプ、掲示板名、ユーザー名
+検索ボタンあり
+ -->
 
+	<form id="form" method="get" th:action="@{'/boardSearch'}">
+		<p>
+			<label>掲示板タイプ</label> <select id="board_type" name="boardType"></select>
+		<p>
+			<input type=text id="keyword" name="keyword" th:value="${keyword}"
+				placeholder="キーワードを入力してください" /> <input id="serrch_button"
+				type="submit" value="検索" />
+	</form>
+
+	<table border="1">
+		<tr>
+			<td>掲示板タイトル</td>
+		</tr>
+
+		<tr th:each="board_list:${boardList}">
+			<td><a th:href="@{/boardContent(id=${board_list.id})}"
+				th:text="${board_list.boardName}"></a></td>
+		</tr>
+	</table>
+
+
+
+	<!-- タイプ、id.タイプ、掲示板名、ユーザー名
+新規登録
+ -->
+	<FORM method=post th:action="@{'/boardRegistration'}"th:object="${board}">
+		<input type=hidden id="account_id" name="createAccountId" th:value="${#authentication.principal.id}" /> 
+		<input type=hidden id="board_id" name="boardId" th:value="${board.id}" /> 
+		<p><select id="regist_board_type" name="boardTypeId"></select> 
+		<p><input type=text id="board_content" name="boardName" placeholder="タイトルを入力してください" />
+		 <p><input type=text id="board_content" name="boardContent" placeholder="詳細を入力してください" />
+		 <p> <input id="submit_button" type="submit" value="新規掲示板作成" />
+	</FORM>
 </body>
 </html>

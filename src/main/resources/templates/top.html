@@ -1,16 +1,27 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+      >
 <head>
+<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet"></link>
+<script th:src="@{/js/lib/jquery-3.3.1.min.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/controller/controller.js}"></script>
+<script th:src="@{/js/controller/boardType.js}"></script>
 <meta charset="UTF-8">
 <title>top</title>
 </head>
 <body>
 <div th:fragment="logout" sec:authorize="isAuthenticated()">
-<span th:text="${userName}+'様'"></span>
+<h3>ようこそ<span sec:authentication="principal.username">山田</span>様</h3>
 </div>
-<p>topだよ</p>
-<a href="/loginForm">ログイン</a>
-<a href="/builletin_board">掲示板</a>
+<h1>何をする？<h1>
+<h2><select id="terminal"></select></h2>
+<form th:action="@{/insertTerminal}" method="post">
+	<input type="text" id="stationName" name="stationName" />
+    <input type="submit" class="btn btn-success" value="ここにも行きたい!!" />
+</form>
+<a href="/builletinBoard">掲示板</a>
+<a href="/logout">ログアウト</a>
 </body>
 </html>

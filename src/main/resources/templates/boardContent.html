@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet"></link>
+<script th:src="@{/js/lib/jquery-3.3.1.min.js}"></script>
+<meta charset="UTF-8">
+<title>掲示板詳細</title>
+</head>
+<body>
+	<table border="1">
+		<tr>
+			<td>掲示板タイトル</td>
+		</tr>
+		<tr>
+			<td id="board" th:text="${board.boardName}" th:value="${board.id}">
+			</td>
+		</tr>
+		<tr id=comment_list th:each="comment:${board.commentList}" th:object="${comment}">
+			<td id=account th:text="${comment.account.userName}" />
+			<td id=comment th:text="*{commentD}" />
+			<td th:if="${#authentication.principal.id} eq ${comment.account.id}">
+				<a class="btn btn-warning" th:href="@{/commentContribution/delete/{commentId}(commentId=${comment.id})}">delete</a>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<FORM method=post th:action="@{'/commentContribution'}" th:object="${comment}">
+					<input type=hidden id="account_id" name="accountId" th:value="${#authentication.principal.id}" />
+					<input type=hidden id="board_id" name="boardId" th:value="${board.id}" />
+					<input type=text id="comment" name="commentD" placeholder="コメントを入力してください" /> 
+					<input	id="submit_button" type="submit" value="コメント投稿" />
+				</FORM>
+			</td>
+			<td th:if="${param.error}">Error!</td>
+		</tr>
+	</table>
+	<p th:if="${validationError}" th:text="${validationError}">validation error</p>
+	<a href="/builletinBoard">掲示板検索画面</a>
+</body>
+</html>

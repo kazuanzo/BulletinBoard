@@ -9,20 +9,16 @@ import javax.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
-@Entity
-@Table(name="user")
 @Getter
 @Setter
-public class User {
+@Entity
+@Table(name="station")
+public class Station {
+	
 	@Id
 	@GeneratedValue
 	private int id;
-	@Column(name="password")
-	private String password;
-	@Column(name="user_name")
-	private String userName;
-	@Column(name="old")
-	private  int old;
-	
-	
+	@Column(name="station_name")
+    private String stationName;
+
 }
